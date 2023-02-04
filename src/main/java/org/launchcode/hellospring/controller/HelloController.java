@@ -71,25 +71,33 @@ public class HelloController {
     }
     @RequestMapping(method = RequestMethod.POST, value="greeting")
     public static String createMessage(@RequestParam String name, @RequestParam String language) {
-        String result = "";
+        String greeting = "";
 
         switch(language) {
             case "en":
-                result = "Hello " + name;
+                greeting = "Hello ";
                 break;
             case "hi":
-                result = "नमस्ते (Namaste) " + name;
+                greeting = "नमस्ते (Namaste) ";
                 break;
             case "zh-Hans":
-                result = "你好 (Nǐ hǎo) " + name;
+                greeting = "你好 (Nǐ hǎo) ";
                 break;
             case "sp":
-                result = "Halo " + name;
+                greeting = "Halo ";
                 break;
             case "eu":
-                result = "Kaixo " + name;
+                greeting = "Kaixo ";
                 break;
         }
-        return result;
+        String html = "<html>" +
+                "<body>" +
+                "<h1>" + greeting + name +
+                "</h1>" +
+                "</body>" +
+               "</html>";
+
+
+        return html;
     }
 }
