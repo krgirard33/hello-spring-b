@@ -46,4 +46,50 @@ public class HelloController {
                         "</html>";
         return html;
     }
+
+    // lives at /hello/language
+    @GetMapping("language")
+    public String helloFormLanguage() {
+        String html =
+                "<html>" +
+                        "<body>" +
+                        "<form method = 'post' action = 'greeting'>" +
+                        "<input type = 'text' name = 'name' />" +
+                        "<select name='language' id='language'>" +
+                        "<option value='en'>English</option>" + // Hello
+                        "<option value='hi'>Hindi</option>" + // नमस्ते (Namaste)
+                        "<option value='zh-Hans'>Chinese</option>" + // 你好 (Nǐ hǎo)
+                        "<option value='sp'>Spanish</option>" + // Hola
+                        "<option value='eu'>Basque</option>" + // Kaixo
+                        "</select>" +
+                        "<input type = 'submit' value = 'Greet Me!' />" +
+                        "</form>" +
+                        "</body>" +
+                        "</html>";
+
+        return html;
+    }
+    @RequestMapping(method = RequestMethod.POST, value="greeting")
+    public static String createMessage(@RequestParam String name, @RequestParam String language) {
+        String result = "";
+
+        switch(language) {
+            case "en":
+                result = "Hello " + name;
+                break;
+            case "hi":
+                result = "नमस्ते (Namaste) " + name;
+                break;
+            case "zh-Hans":
+                result = "你好 (Nǐ hǎo) " + name;
+                break;
+            case "sp":
+                result = "Halo " + name;
+                break;
+            case "eu":
+                result = "Kaixo " + name;
+                break;
+        }
+        return result;
+    }
 }
